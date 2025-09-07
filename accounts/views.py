@@ -1,16 +1,18 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, status
+from rest_framework.viewsets import ModelViewSet
 from .serializer import UserModelSerializer
 from rest_framework.response import Response
-from django.contrib.auth import get_user_model
-User = get_user_model
+
+from .models import UserModel
+
 
 class UserModelViewSet (viewsets.ModelViewSet):
-    queryset = User.objects.all ()
+    queryset = UserModel.objects.all ()
     serializer_class = UserModelSerializer 
 
     def get (self):
-        user = User.objects.all ()
+        user = UserModel.objects.all ()
         serializer = UserModelSerializer (user, many=True)
         return Response (serializer.data)
     

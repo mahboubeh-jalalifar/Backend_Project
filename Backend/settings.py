@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'rest_framework_simplejwt',
+    
 ]
+
+AUTH_USER_MODEL = 'accounts.UserModel'
 
 REST_FRAMEWORK= {
     'DEFUALT_AUTHENTICATION_CLASS': ('rest_framework_simplejwt.authentication.JWTAuthentication')
@@ -85,17 +88,25 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-import os
+# import os
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         # 'NAME':os.getenv ("POSTGRES_DB","Backenddb"),
+#         # 'USER': os.getenv ("POSTGRES_USER","Backenduser"),
+#         # 'PORT': os.getenv ("POSTGRES_PORT","5432"),
+#         # 'PASSWORD': os.getenv ("POSTGRES_PASSWORD","Backendpassword"),
+#         # 'HOST': os.getenv ("POSTGRES_HOST","localhost"),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.posgtgresql',
-        # 'NAME':os.getenv ("POSTGRES_DB","Backenddb"),
-        # 'USER': os.getenv ("POSTGRES_USER","Backenduser"),
-        # 'PORT': os.getenv ("POSTGRES_PORT","5432"),
-        # 'PASSWORD': os.getenv ("POSTGRES_PASSWORD","Backendpassword"),
-        # 'HOST': os.getenv ("POSTGRES_HOST","localhost"),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
     }
 }
+
 
 
 # Password validation
