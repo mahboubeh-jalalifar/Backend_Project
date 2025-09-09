@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, status
 from rest_framework.viewsets import ModelViewSet
-from .serializer import UserModelSerializer
+from .serializers import UserModelSerializer
 from rest_framework.response import Response
 
 from .models import UserModel
-
+class IsOwnerOradmin (permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.user.is_staff():
+            return True
+        return getattr(obj,"user_id",None) == request.user.id
 
 class UserModelViewSet (viewsets.ModelViewSet):
     queryset = UserModel.objects.all ()
@@ -30,7 +34,7 @@ class UserModelViewSet (viewsets.ModelViewSet):
         elif self.action in ['destroy','list']:
             return [permissions.IsAdminUser()]
         else:
-            return [permissions.IsAdminUser()],[permissions.IsAuthenticated()]
+            return [permissions.IsAdminUser()],[permissions.IsAuthenticated(),IsOwnerOradmin()]
 
 
 

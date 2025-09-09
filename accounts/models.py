@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
+from datetime import date
 
 
 class Roles (models.TextChoices):
@@ -10,15 +11,31 @@ class Roles (models.TextChoices):
        Student= "Student","Student",
        Parents= "Parents","Parents",
        Others= "Others","Others",
+
+class Gender (models.TextChoices):
+     Male= "Male","Male",
+     Female= "Female","female",
+     Other= "Other","Other",
                    
 class UserModel (AbstractUser):
-    role= models.CharField (max_length=50 , choices=Roles.choices , default=Roles.Admin)
+    role= models.CharField (max_length=50 , choices=Roles.choices , default=Roles.Student)
     email= models.EmailField (max_length=200, unique=True )
-    age= models.PositiveIntegerField ()
+    phone=models.IntegerField (blank=True,null=True)
+    adress=models.CharField(max_length=200,blank=True,null=True)
+    date_of_birth= models.DateTimeField (blank=True,null=True)
+    gender= models.CharField (choices=Gender.choices,null=True,blank=True)
     updated_at= models.DateTimeField (auto_now=True)
     created_at=models.DateTimeField (auto_now_add=True)
-    def __str__ (self):
-        return self.role
+
+    @property
+    def age(self):
+        today = date.today()
+        now = self.date_of_birth.date()
+        return today.year - now.year - ((today.month, today.day) < (now.month, now.day))
+
+    def __str__(self):
+        return f"{self.username} is {self.role} and is {self.age} years old"
+
     
 
 

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'students',
     'rest_framework',
     'rest_framework_simplejwt',
     
@@ -46,8 +47,10 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'accounts.UserModel'
 
 REST_FRAMEWORK= {
-    'DEFUALT_AUTHENTICATION_CLASS': ('rest_framework_simplejwt.authentication.JWTAuthentication')
+    'DEFAULT_AUTHENTICATION_CLASS': ('rest_framework_simplejwt.authentication.JWTAuthentication')
 }
+
+
 
 from datetime import timedelta
 SIMPLE_JWT = {
