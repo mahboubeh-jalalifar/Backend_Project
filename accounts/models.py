@@ -20,10 +20,11 @@ class Gender (models.TextChoices):
 class UserModel (AbstractUser):
     role= models.CharField (max_length=50 , choices=Roles.choices , default=Roles.Student)
     email= models.EmailField (max_length=200, unique=True )
+    national_id_number= models.CharField (unique=True)
     phone=models.IntegerField (blank=True,null=True)
     adress=models.CharField(max_length=200,blank=True,null=True)
     date_of_birth= models.DateTimeField (blank=True,null=True)
-    gender= models.CharField (choices=Gender.choices,null=True,blank=True)
+    gender= models.CharField (choices=Gender.choices, null=True,blank=True)
     updated_at= models.DateTimeField (auto_now=True)
     created_at=models.DateTimeField (auto_now_add=True)
 

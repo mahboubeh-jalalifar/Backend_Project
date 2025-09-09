@@ -7,7 +7,7 @@ class UserModelSerializer (serializers.ModelSerializer):
      password = serializers.CharField  (write_only= True)
      class Meta:
         model= UserModel
-        fields = ["id","username","password","first_name","last_name","email","role","age","gender","date_of_birth","created_at","updated_at","phone","adress"] 
+        fields = ["id","username","password","first_name","last_name","email","role","age","gender","date_of_birth","created_at","updated_at","phone","adress","national_id_number"] 
         read_only_field = ["id","created_at","updated_at"]
         
         def create (self,validated_data):
@@ -23,6 +23,7 @@ class UserModelSerializer (serializers.ModelSerializer):
             date_of_birth= validated_data ["date_of_birth"],
             phone=validated_data ["phone"],
             adress= validated_data["adress"],
+            national_id_number= validated_data["national_id_number"]
 
 
               )

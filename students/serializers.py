@@ -4,7 +4,7 @@ from .models import StudentModel
 class StudentSerializer (serializers.ModelSerializer):
     class Meta:
         model= StudentModel
-        fields= ["id","user","grade","major","GPA","enrollment_date","national_id_number","is_active","bio"]
+        fields= ["id","user","grade","major","GPA","enrollment_date","is_active","bio"]
         read_only_field = ["id"]
     
     def create (self,validated_data):
